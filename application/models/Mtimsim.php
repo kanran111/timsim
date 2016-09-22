@@ -5,12 +5,16 @@
         }
         public function themso($array){
             $this->db->query("delete from sim ");
+            $data = '';
             foreach($array as $row ){
                 if(empty($row)) continue;
                 $sdt = $row; $duoi_8 = substr($row,2,7); $duoi_7 = substr($row,3,6);
                 $this->db->query("call sim_pro('$sdt','$duoi_8','$duoi_7');");
-          
-	     }
+                //$data .= ",('$sdt','$duoi_8','$duoi_7')";
+                
+	       }
+           //$sql = "insert into sim (sdt,8duoi,7duoi) values ('asda','asdasd','sdfsd') " . $data;
+           //$this->db->query($sdt);
         }
         public function themngay($array){
             $this->db->query("delete from sim_ns");
@@ -66,17 +70,20 @@
                     if($b3.$c3.$d3 == $f3.$g3.$h3) $sodep['cap2'][]=$sdt_array[1].$a3.'.'.$b3.$c3.$d3.'.'.$e3.'.'.$f3.$g3.$h3;
                     if($a3.$b3.$c3 == $f3.$g3.$h3) $sodep['cap3'][]=$sdt_array[1].'.'.$a3.$b3.$c3.'.'.$d3.$e3.'.'.$f3.$g3.$h3;
                     if($a3.$b3.$c3 == $d3.$e3.$f3) $sodep['cap4'][]=$sdt_array[1].'.'.$a3.$b3.$c3.'.'.$d3.$e3.$f3.'.'.$g3.$h3;
+                    if($a3 == $c3 && $e3 == $g3 && $b3<=$d3 && $f3 <= $h3  ) $sodep['cap5'][]=$sdt_array[1].'.'.$a3.$b3.'.'.$c3.$d3.'.'.$e3.$f3.'.'.$g3.$h3;
+                    if( $c3.$d3 == $g3.$h3 ) $sodep['abxxab'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.'.'.$e3.$f3.'.'.$g3.$h3;
                     if($sdt_array[1].$a3.$b3 == $c3.$d3.$e3) $sodep['daunguc1'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.$e3.'.'.$f3.$g3.$h3;
                     if($sdt_array[1].$a3.$b3 == $f3.$g3.$h3) $sodep['daunguc2'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.$e3.'.'.$f3.$g3.$h3;
                     if($sdt_array[1].$a3.$b3 == $e3.$d3.$c3) $sodep['dauduoi1'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.$e3.'.'.$f3.$g3.$h3;
                     if($sdt_array[1].$a3.$b3 == $h3.$g3.$f3) $sodep['dauduoi2'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.$e3.'.'.$f3.$g3.$h3;
                     if($a3 == $c3 && $a3 == $e3 ) $sodep['tamhoa1'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.'.'.$e3.$f3.'.'.$g3.$h3;
-                    if($b3 == $d3 && $b3 == $f3 ) $sodep['tamhoa2'][]=$sdt_array[1].'.'.$a3.$b3.'.'.$c3.$d3.'.'.$e3.$f3.'.'.$g3.$h3;
+                    if($b3 == $d3 && $b3 == $f3 && $a3<= $c3 && $c3 <= $g3  ) $sodep['tamhoa2'][]=$sdt_array[1].'.'.$a3.$b3.'.'.$c3.$d3.'.'.$e3.$f3.'.'.$g3.$h3;
                     if($b3 == $c3 && $b3 == $d3 ) $sodep['tamhoa3'][]=$sdt_array[1].$a3.'.'.$b3.$c3.$d3.'.'.$e3.$f3.$g3.$h3;
                     if($c3 == $d3 && $c3 == $e3 ) $sodep['tamhoa4'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.$e3.'.'.$f3.$g3.$h3;
                     if($d3 == $e3 && $d3 == $f3 ) $sodep['tamhoa5'][]=$sdt_array[1].$a3.'.'.$b3.$c3.'.'.$d3.$e3.$f3.'.'.$g3.$h3;
                     if($e3 == $f3 && $e3 == $g3 ) $sodep['tamhoa6'][]=$sdt_array[1].$a3.'.'.$b3.$c3.$d3.'.'.$e3.$f3.$g3.'.'.$h3;
                     if($f3 == $g3 && $f3 == $h3 ) $sodep['tamhoa7'][]=$sdt_array[1].$a3.$b3.'.'.$c3.$d3.$e3.'.'.$f3.$g3.$h3;
+                    
                 }
             }//foreach
             
@@ -152,6 +159,10 @@
                 $row['tamhoa6'] = $kq->result_array(); $kq->free_result();
                 $kq = $this->db->query("select sdt from sim_dep where loai like 'tamhoa7' order by rand() limit 15 ");
                 $row['tamhoa7'] = $kq->result_array(); $kq->free_result();
+                $kq = $this->db->query("select sdt from sim_dep where loai like 'cap5' order by rand() limit 15 ");
+                $row['cap5'] = $kq->result_array(); $kq->free_result();
+                $kq = $this->db->query("select sdt from sim_dep where loai like 'abxxab' order by rand() limit 15 ");
+                $row['abxxab'] = $kq->result_array(); $kq->free_result();
                 return $row;
             }else{
                 $kq = $this->db->query("select sdt from sim_dep where (loai like '$loai') order by rand() limit 15 ");

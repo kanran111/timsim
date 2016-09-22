@@ -42,6 +42,8 @@
             <td>Lặp Đều 1</td>
             <td>Lặp Đều 2</td>
             <td>Lặp Đều 3</td>
+            <td>Cặp 5</td>
+            <td>abxxab</td>
             <td>Lặp Đuôi 1</td>
             <td>Lặp Đuôi 2</td>
             <td>Lặp Đuôi 3</td>
@@ -72,6 +74,10 @@
             <td><?php foreach($row['lapdeu2'] as $value) {
             echo '<br />'.$value['sdt'];}?></td>
             <td><?php foreach($row['lapdeu3'] as $value) {
+            echo '<br />'.$value['sdt'];}?></td>
+            <td><?php foreach($row['cap5'] as $value) {
+            echo '<br />'.$value['sdt'];}?></td>
+            <td><?php foreach($row['abxxab'] as $value) {
             echo '<br />'.$value['sdt'];}?></td>
             <td><?php foreach($row['lapduoi1'] as $value) {
             echo '<br />'.$value['sdt'];}?></td>
